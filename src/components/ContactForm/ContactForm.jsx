@@ -1,19 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useId } from "react";
-import * as Yup from "yup";
-import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContactToList } from "../../redux/contactsOps";
+import { useId } from "react";
 
-const PersonSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Name is required"),
-  number: Yup.string()
-    .matches(/^\d{3}-\d{3}-\d{4}$/, "Format is XXX-XXX-XXXX")
-    .required("Number is required"),
-});
+import { apiAddContactToList } from "../../redux/contacts/operations";
+import { PersonSchema } from "../../utils/schemas";
+import css from "./ContactForm.module.css";
 
 const initialValues = {
   name: "",
@@ -27,7 +18,7 @@ export default function ContactForm() {
   const numberId = useId();
 
   const handleAdd = (values, actions) => {
-    const action = addContactToList({ ...values });
+    const action = apiAddContactToList({ ...values });
     dispatch(action);
     actions.resetForm();
   };

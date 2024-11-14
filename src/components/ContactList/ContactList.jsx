@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
 import { useEffect } from "react";
-import { fetchContacts } from "../../redux/contactsOps";
+import { apiFetchContacts } from "../../redux/contacts/operations.js";
 import {
   selectError,
   selectFilteredContacts,
@@ -17,7 +17,7 @@ export default function ContactList() {
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(apiFetchContacts());
   }, [dispatch]);
 
   return (
