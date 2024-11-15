@@ -6,6 +6,7 @@ import clsx from "clsx";
 import css from "./UserMenu.module.css";
 import { selectIsMobile } from "../../redux/format/selectors";
 import { IoMdContacts } from "react-icons/io";
+import { MdLogout } from "react-icons/md";
 
 const buildCssClasses = ({ isActive }) =>
   clsx(css.link, isActive && css.active);
@@ -28,8 +29,8 @@ const UserMenu = () => {
         {isMobile ? "👋" : "Welcome,"}{" "}
         <span className={css.span}>{userDataName}</span>
       </p>
-      <button type="button" onClick={onLogout}>
-        Log Out
+      <button className={css.button} type="button" onClick={onLogout}>
+        {isMobile ? <MdLogout size={"30px"} /> : "Log Out"}
       </button>
     </>
   );
