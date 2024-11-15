@@ -4,6 +4,8 @@ import { selectUsername } from "../../redux/auth/selectors";
 import { apiLogoutUser } from "../../redux/auth/operations";
 import clsx from "clsx";
 import css from "./UserMenu.module.css";
+import { selectIsMobile } from "../../redux/format/selectors";
+import { IoMdContacts } from "react-icons/io";
 
 const buildCssClasses = ({ isActive }) =>
   clsx(css.link, isActive && css.active);
@@ -11,6 +13,7 @@ const buildCssClasses = ({ isActive }) =>
 const UserMenu = () => {
   const dispatch = useDispatch();
   const userDataName = useSelector(selectUsername);
+  const isMobile = useSelector(selectIsMobile);
 
   const onLogout = () => {
     dispatch(apiLogoutUser());
@@ -19,10 +22,11 @@ const UserMenu = () => {
   return (
     <>
       <NavLink className={buildCssClasses} to="/contacts" end>
-        Contacts
+        {isMobile ? <IoMdContacts size={"32px"} /> : "Contacts"}
       </NavLink>
       <p className={css.p}>
-        Welcome, <span className={css.span}>{userDataName}</span>
+        {isMobile ? "👋" : "Welcome,"}{" "}
+        <span className={css.span}>{userDataName}</span>
       </p>
       <button type="button" onClick={onLogout}>
         Log Out

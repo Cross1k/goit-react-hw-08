@@ -31,8 +31,8 @@
   align-self: flex-start;
 }
 
-.button {
-  width: 112px;
-  align-self: center;
-  padding: 4px;
+@media screen and (max-width: 511px) {
+  .form {
+    width: 320px;
+  }
 }

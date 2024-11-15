@@ -4,4 +4,10 @@
   padding: 10px 8px;
   gap: 10px;
   margin-bottom: 20px;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
 }

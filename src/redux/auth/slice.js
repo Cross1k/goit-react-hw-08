@@ -42,11 +42,11 @@ const authSlice = createSlice({
       .addCase(apiGetCurrentUser.rejected, (state) => {
         state.isRefreshing = false;
       })
-      .addCase(apiLogoutUser.pending, () => {})
+      // .addCase(apiLogoutUser.pending, () => {})
       .addCase(apiLogoutUser.fulfilled, () => {
         return INITIAL_STATE;
-      })
-      .addCase(apiLogoutUser.rejected, () => {}),
+      }),
+  // .addCase(apiLogoutUser.rejected, () => {}),
 });
 
 export const authReducer = authSlice.reducer;

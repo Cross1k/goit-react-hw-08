@@ -9,6 +9,7 @@ import { selectRefreshing } from "./redux/auth/selectors";
 import { apiGetCurrentUser } from "./redux/auth/operations";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import { formatScreen } from "./redux/format/slice";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
@@ -24,6 +25,15 @@ function App() {
 
   useEffect(() => {
     dispatch(apiGetCurrentUser());
+
+    const handleResize = () => {
+      dispatch(formatScreen(window.innerWidth <= 404));
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [dispatch]);
 
   if (isRefreshing) {
